@@ -1,4 +1,5 @@
 import { dbConnect } from "../../../utils/db";
+import Product from "../../../models/product.model";
 
 dbConnect();
 
