@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function Home({ data }) {
-  const { products, setProducts } = useContext(productContext);
+  const { products, setProducts, deleteProduct } = useContext(productContext);
 
   const router = useRouter();
 
@@ -13,9 +13,17 @@ export default function Home({ data }) {
 
   return (
     <div>
-      {data.map((d) => (
+      {products.map((d) => (
         <div key={d._id}>
+          <p>{d.code}</p>
           <h1>{d.description}</h1>
+          <button
+            onClick={async () => {
+              await deleteProduct(d._id);
+            }}
+          >
+            Eliminar
+          </button>
         </div>
       ))}
       <button
@@ -30,7 +38,9 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://internal-movements-app.vercel.app/api/products");
+  const res = await fetch(
+    "https://internal-movements-app.vercel.app/api/products"
+  );
   const data = await res.json();
 
   return {
