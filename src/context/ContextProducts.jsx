@@ -8,7 +8,7 @@ export default function ProductContextComponent({ children }) {
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "http://localhost:3000/api/products",
+      "https://internal-movements-app.vercel.app/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
