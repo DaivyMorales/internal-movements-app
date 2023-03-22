@@ -24,6 +24,9 @@ export default function Home({ data }) {
           >
             Eliminar
           </button>
+          <button onClick={() => router.push(`products/${d._id}/edit`)}>
+            Editar
+          </button>
         </div>
       ))}
       <button
@@ -38,9 +41,7 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(
-    "https://internal-movements-app.vercel.app/api/products"
-  );
+  const res = await fetch("https://internal-movements-app.vercel.app//api/products");
   const data = await res.json();
 
   return {
