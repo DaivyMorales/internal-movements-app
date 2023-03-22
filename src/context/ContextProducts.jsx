@@ -8,7 +8,7 @@ export default function ProductContextComponent({ children }) {
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "https://internal-movements-app.vercel.app",
+      "http://localhost:3000/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
@@ -17,7 +17,7 @@ export default function ProductContextComponent({ children }) {
 
   const deleteProduct = async (productId) => {
     const response = await axios.delete(
-      `https://internal-movements-app.vercel.app/${productId}`
+      `http://localhost:3000/api/products/${productId}`
     );
     setProducts(products.filter((product) => product._id !== productId));
     return response.data;
@@ -25,7 +25,7 @@ export default function ProductContextComponent({ children }) {
 
   const updateProduct = async (productId, product) => {
     const response = await axios.put(
-      `https://internal-movements-app.vercel.app/${productId}`,
+      `http://localhost:3000/api/products/${productId}`,
       product
     );
     return response.data;
@@ -33,7 +33,7 @@ export default function ProductContextComponent({ children }) {
 
   const getProduct = async (productId) => {
     const response = await axios.get(
-      `https://internal-movements-app.vercel.app/api/products/${productId}`
+      `http://localhost:3000/api/products/${productId}`
     );
     return response.data;
   };
