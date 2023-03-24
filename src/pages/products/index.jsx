@@ -13,6 +13,8 @@ export default function Home({ data }) {
 
   return (
     <div>
+      
+
       {products.map((d) => (
         <div key={d._id}>
           <p>{d.code}</p>
