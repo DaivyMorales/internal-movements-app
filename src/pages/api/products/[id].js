@@ -2,6 +2,12 @@ import { dbConnect } from "../../../utils/db";
 import Product from "../../../models/product.model";
 
 export default async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+
   const {
     method,
     body,
