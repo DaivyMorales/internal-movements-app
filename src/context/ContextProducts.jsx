@@ -38,10 +38,7 @@ export default function ProductContextComponent({ children }) {
       );
       return response.data;
     } catch (error) {
-      const response = await axios.get(
-        `http://localhost:3000/api/products/${productId}`
-      );
-      return response.data;
+      console.log(error);
     }
   };
 
@@ -52,8 +49,7 @@ export default function ProductContextComponent({ children }) {
       );
       return response.data;
     } catch (error) {
-      const response = await axios.get("http://localhost:3000/api/products");
-      return response.data;
+      console.log(error);
     }
   };
 

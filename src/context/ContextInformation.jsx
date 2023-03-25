@@ -16,13 +16,7 @@ export default function ContextInformationComponent({ children }) {
       console.log(response.data);
       return response.data;
     } catch (error) {
-      const response = await axios.post(
-        "http://localhost:3000/api/information",
-        information
-      );
-      setInformations([...informations, response.data]);
-      console.log(response.data);
-      return response.data;
+      console.log(error);
     }
   };
 
@@ -36,13 +30,7 @@ export default function ContextInformationComponent({ children }) {
       );
       return response.data;
     } catch (error) {
-      const response = await axios.delete(
-        `http://localhost:3000/api/information/${informationId}`
-      );
-      setInformations(
-        informations.filter((info) => info._id !== informationId)
-      );
-      return response.data;
+      console.log(error);
     }
   };
 
@@ -54,11 +42,7 @@ export default function ContextInformationComponent({ children }) {
 
       return response.data;
     } catch (error) {
-      const response = await axios.get(
-        `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
-      );
-
-      return response.data;
+      console.log(error);
     }
   };
 
@@ -70,11 +54,7 @@ export default function ContextInformationComponent({ children }) {
       );
       return response.data;
     } catch (error) {
-      const response = await axios.put(
-        `http://localhost:3000/api/information/${informationId}`,
-        information
-      );
-      return response.data;
+      console.log(error);
     }
   };
 
