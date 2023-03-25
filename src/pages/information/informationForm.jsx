@@ -83,10 +83,7 @@ export default function InformationForm({ data }) {
               <div className="flex flex-col gap-y-3">
                 <label htmlFor="op">Op</label>
                 <input
-<<<<<<< HEAD
                   className="inputForm"
-=======
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
                   type="number"
                   name="op"
                   onChange={handleChange}
@@ -103,7 +100,6 @@ export default function InformationForm({ data }) {
                     className="text-right text-sm font-bold text-gray-600"
                   >
                     {" "}
-<<<<<<< HEAD
                     {productFoundForm === 0 ? (
                       <span className="text-red-500">
                         Producto no encontrado
@@ -115,16 +111,6 @@ export default function InformationForm({ data }) {
                 </div>
                 <input
                   className="inputForm"
-=======
-                    {productFoundForm === 0
-                      ? (
-                        <span className="text-red-500">Producto no encontrado</span>
-                      )
-                      : productFoundForm}{" "}
-                  </label>
-                </div>
-                <input
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
                   type="text"
                   name="product"
                   onChange={handleChange}
@@ -135,10 +121,7 @@ export default function InformationForm({ data }) {
               <div className="flex flex-col gap-y-3">
                 <label htmlFor="sap_lot">Lote Sap</label>
                 <input
-<<<<<<< HEAD
                   className="inputForm"
-=======
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
                   type="text"
                   name="sap_lot"
                   onChange={handleChange}
