@@ -132,10 +132,7 @@ export default function InformationForm({ data }) {
               <div className="flex flex-col gap-y-3">
                 <label htmlFor="provider_lot"> Lote Proveedor</label>
                 <input
-<<<<<<< HEAD
                   className="inputForm"
-=======
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
                   type="text"
                   name="provider_lot"
                   onChange={handleChange}
@@ -147,10 +144,7 @@ export default function InformationForm({ data }) {
                 <div className="flex flex-col gap-y-3">
                   <label htmlFor="packages_delivered"> Entregados</label>
                   <input
-<<<<<<< HEAD
                     className="inputForm"
-=======
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
                     type="number"
                     name="packages_delivered"
                     onChange={handleChange}
@@ -161,10 +155,7 @@ export default function InformationForm({ data }) {
                 <div className="col-span-2 flex flex-col gap-y-3">
                   <label htmlFor="balances"> Saldo</label>
                   <input
-<<<<<<< HEAD
                     className="inputForm"
-=======
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
                     type="number"
                     name="balances"
                     onChange={handleChange}
@@ -187,11 +178,7 @@ export default function InformationForm({ data }) {
 }
 
 export async function getServerSideProps(context) {
-<<<<<<< HEAD
   const res = await fetch("https://internal-movements-app.vercel.app/api/products");
-=======
-  const res = await fetch("http://localhost:3000/api/products");
->>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
   const data = await res.json();
 
   return {

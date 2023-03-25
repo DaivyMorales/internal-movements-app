@@ -8,7 +8,7 @@ export default function ProductContextComponent({ children }) {
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "http://localhost:3000/api/products",
+      "https://internal-movements-app.vercel.app/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
@@ -25,7 +25,7 @@ export default function ProductContextComponent({ children }) {
 
   const updateProduct = async (productId, product) => {
     const response = await axios.put(
-      `http://localhost:3000/api/products/${productId}`,
+      `https://internal-movements-app.vercel.app/api/products/${productId}`,
       product
     );
     return response.data;
@@ -33,7 +33,7 @@ export default function ProductContextComponent({ children }) {
 
   const getProduct = async (productId) => {
     const response = await axios.get(
-      `http://localhost:3000/api/products/${productId}`
+      `https://internal-movements-app.vercel.app/api/products/${productId}`
     );
     return response.data;
   };
@@ -47,7 +47,7 @@ export default function ProductContextComponent({ children }) {
         deleteProduct,
         updateProduct,
         getProduct,
-        updateProduct
+        updateProduct,
       }}
     >
       {children}
