@@ -5,7 +5,12 @@ import Product from "../../../models/product.model";
 dbConnect();
 
 export default async function handler(req, res) {
-  
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, Content-Type, Authorization"
+  );
 
   const { method, body } = req;
 
