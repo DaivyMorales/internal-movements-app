@@ -5,13 +5,13 @@ import { contextInformation } from "@/context/ContextInformation";
 import { productContext } from "@/context/ContextProducts";
 
 export default function InformationForm({ data }) {
+  console.log("DATA", data);
   const { createInformation, getInformation, updateInformation } =
     useContext(contextInformation);
   const { products, setProducts, getProducts, getProduct } =
     useContext(productContext);
 
   const [productUpdate, setProductUpdate] = useState();
-  console.log("productUpdate", productUpdate);
 
   const { push, query } = useRouter();
 
@@ -37,7 +37,6 @@ export default function InformationForm({ data }) {
       packages_delivered: response.packages_delivered,
       balances: response.balances,
     });
-    console.log("response", response);
   };
 
   const loadProducts = async () => {
@@ -46,16 +45,13 @@ export default function InformationForm({ data }) {
   };
 
   useEffect(() => {
+    loadProducts();
     if (query.id) {
       loadInformation(query.id);
-      loadProducts();
     }
   }, []);
 
-  console.log("products", products);
-
   useEffect(() => {
-    // setProducts(data);
     if (productsForm.product.length >= 10) {
       const productFound = products.find(
         (product) => productsForm.product === product.code
@@ -71,8 +67,6 @@ export default function InformationForm({ data }) {
       setProductFoundForm(null);
     }
   }, [productsForm.product, products]);
-
-  console.log(productFoundForm);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -188,7 +182,7 @@ export default function InformationForm({ data }) {
                     name="balances"
                     onChange={handleChange}
                     value={values.balances}
-                    step="0.01"
+                    // step="0.01"
                     placeholder="Ej: 1.5"
                   />
                 </div>
@@ -208,9 +202,7 @@ export default function InformationForm({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(
-    "https://darling-cassata-6b0d17.netlify.app/api/products"
-  );
+  const res = await fetch("https://darling-cassata-6b0d17.netlify.app/api/products");
   const data = await res.json();
   return {
     props: { data },
