@@ -8,7 +8,7 @@ export default function ProductContextComponent({ children }) {
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "http://localhost:3000/api/products",
+      "https://darling-cassata-6b0d17.netlify.app/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
@@ -17,7 +17,7 @@ export default function ProductContextComponent({ children }) {
 
   const deleteProduct = async (productId) => {
     const response = await axios.delete(
-      `http://localhost:3000/api/products/${productId}`
+      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
     );
     setProducts(products.filter((product) => product._id !== productId));
     return response.data;
@@ -25,7 +25,7 @@ export default function ProductContextComponent({ children }) {
 
   const updateProduct = async (productId, product) => {
     const response = await axios.put(
-      `http://localhost:3000/api/products/${productId}`,
+      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`,
       product
     );
     return response.data;
@@ -33,13 +33,15 @@ export default function ProductContextComponent({ children }) {
 
   const getProduct = async (productId) => {
     const response = await axios.get(
-      `http://localhost:3000/api/products/${productId}`
+      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
     );
     return response.data;
   };
 
   const getProducts = async () => {
-    const response = await axios.get("http://localhost:3000/api/products");
+    const response = await axios.get(
+      "https://darling-cassata-6b0d17.netlify.app/api/products"
+    );
     return response.data;
   };
 
