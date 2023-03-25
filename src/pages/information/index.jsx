@@ -81,7 +81,7 @@ export default function ViewInformation({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("http://localhost:3000/api/information");
+  const res = await fetch("https://internal-movements-app.vercel.app/api/information");
   const data = await res.json();
 
   return {

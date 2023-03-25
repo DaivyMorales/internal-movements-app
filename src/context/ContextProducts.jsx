@@ -17,7 +17,7 @@ export default function ProductContextComponent({ children }) {
 
   const deleteProduct = async (productId) => {
     const response = await axios.delete(
-      `http://localhost:3000/api/products/${productId}`
+      `https://internal-movements-app.vercel.app/api/products/${productId}`
     );
     setProducts(products.filter((product) => product._id !== productId));
     return response.data;
