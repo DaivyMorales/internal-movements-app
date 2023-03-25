@@ -11,15 +11,15 @@ export default function InformationCard({ info }) {
   const { deleteInformation } = useContext(contextInformation);
 
   const [product, setProduct] = useState([]);
+  // console.log("product", product);
+  console.log("code", info.product);
 
-  const loadProduct = async (id) => {
-    const response = await getProduct(id);
+  const loadProduct = async (code) => {
+    const response = await getProduct(code);
     setProduct(response);
-    // console.log(product)
   };
-
   useEffect(() => {
-    loadProduct(info.product._id || info.product);
+    loadProduct(info.product);
   }, []);
 
   return (

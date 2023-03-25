@@ -29,11 +29,9 @@ export default function InformationForm({ data }) {
 
   const loadInformation = async (idInformation) => {
     const response = await getInformation(idInformation);
-    const resProduct = await getProduct(response.product);
-    setProductUpdate(resProduct);
     setProductsForm({
       op: response.op,
-      product: resProduct.code,
+      product: response.product,
       sap_lot: response.sap_lot,
       provider_lot: response.provider_lot,
       packages_delivered: response.packages_delivered,
@@ -51,14 +49,13 @@ export default function InformationForm({ data }) {
     if (query.id) {
       loadInformation(query.id);
       loadProducts();
-    } else {
-      setProducts(data);
     }
   }, []);
 
   console.log("products", products);
 
   useEffect(() => {
+    // setProducts(data);
     if (productsForm.product.length >= 10) {
       const productFound = products.find(
         (product) => productsForm.product === product.code
@@ -89,19 +86,17 @@ export default function InformationForm({ data }) {
         initialValues={productsForm}
         onSubmit={async (values, { resetForm }) => {
           if (query.id) {
-            setProductsForm({
-              ...productsForm,
-              product: productUpdate._id,
-            });
             const result = await updateInformation(query.id, values);
             console.log(result);
             console.log("finals values", values);
+            resetForm();
+            push("/information");
           } else {
             const result = await createInformation(values);
             console.log(result);
+            resetForm();
+            push("/information");
           }
-          resetForm();
-          push("/information");
         }}
       >
         {({ values, handleSubmit }) => (
@@ -214,16 +209,16 @@ export default function InformationForm({ data }) {
 
 export async function getServerSideProps(context) {
   try {
-    const res = await fetch(
-      "https://darling-cassata-6b0d17.netlify.app/api/products"
-    );
+    const res = await fetch("http://localhost:3000/api/products");
     const data = await res.json();
 
     return {
       props: { data },
     };
   } catch (error) {
-    const res = await fetch("http://localhost:3000/api/products");
+    const res = await fetch(
+      "https://darling-cassata-6b0d17.netlify.app/api/products"
+    );
     const data = await res.json();
     return {
       props: { data },

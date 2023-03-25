@@ -49,13 +49,13 @@ export default function ContextInformationComponent({ children }) {
   const getInformation = async (informationId) => {
     try {
       const response = await axios.get(
-        `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
+        `http://localhost:3000/api/information/${informationId}`
       );
 
       return response.data;
     } catch (error) {
       const response = await axios.get(
-        `http://localhost:3000/api/information/${informationId}`
+        `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
       );
 
       return response.data;

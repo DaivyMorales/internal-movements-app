@@ -1,23 +1,19 @@
 import { dbConnect } from "../../../utils/db";
 import Product from "../../../models/product.model";
 
-export default async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-
+export default async function handler(req, res) {
   const {
     method,
     body,
-    query: { id },
+    query: { code },
   } = req;
+
+  await dbConnect();
 
   switch (method) {
     case "GET":
       try {
-        const product = await Product.findById(id);
+        const product = await Product.findOne({ code: code });
 
         if (!product) return res.status(404).json({ msg: "Product not found" });
 
@@ -28,7 +24,7 @@ export default async (req, res) => {
 
     case "PUT":
       try {
-        const product = await Product.findByIdAndUpdate(id, body, {
+        const product = await Product.findOneAndUpdate({ code }, body, {
           new: true,
         });
 
@@ -41,7 +37,7 @@ export default async (req, res) => {
 
     case "DELETE":
       try {
-        const deletedProduct = await Product.findByIdAndRemove(id);
+        const deletedProduct = await Product.findOneAndRemove({ code });
 
         if (!deletedProduct)
           return res.status(404).json({ msg: "Product not found" });
@@ -54,4 +50,4 @@ export default async (req, res) => {
     default:
       return res.status(400).json({ msg: "That method isn't supported!" });
   }
-};
+}

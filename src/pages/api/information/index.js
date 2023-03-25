@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.setHeader("Access-Control-Allow-Methods", "DELETE", "PUT", "GET")
+  res.setHeader("Access-Control-Allow-Methods", "DELETE", "PUT", "GET");
 
   const { method, body } = req;
 
@@ -25,12 +25,18 @@ export default async function handler(req, res) {
 
     case "POST":
       try {
-        const { op, sap_lot, provider_lot, packages_delivered, balances } =
-          body;
+        const {
+          op,
+          product,
+          sap_lot,
+          provider_lot,
+          packages_delivered,
+          balances,
+        } = body;
 
-        const product = await Product.findOne({
-          code: body.product,
-        }); /*.populate("Products");*/
+        // const product = await Product.findOne({
+        //   code: body.product,
+        // });
 
         const newInformation = new Information({
           op,
@@ -41,7 +47,6 @@ export default async function handler(req, res) {
           balances,
         });
         const informationSaved = await newInformation.save();
-
 
         return res.status(200).json(informationSaved);
       } catch (error) {

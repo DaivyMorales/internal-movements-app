@@ -13,14 +13,8 @@ export default function ViewInformation({ data }) {
 
   const router = useRouter();
 
-  const loadProducts = async () => {
-    const response = await getProducts();
-    setProducts(response.data);
-  };
-
   useEffect(() => {
     setInformations(data);
-    loadProducts();
   }, []);
 
   return (
@@ -89,10 +83,21 @@ export default function ViewInformation({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://darling-cassata-6b0d17.netlify.app/api/information");
-  const data = await res.json();
+  try {
+    const res = await fetch("http://localhost:3000/api/information");
+    const data = await res.json();
 
-  return {
-    props: { data },
-  };
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    const res = await fetch(
+      "https://darling-cassata-6b0d17.netlify.app/api/information"
+    );
+    const data = await res.json();
+
+    return {
+      props: { data },
+    };
+  }
 }
