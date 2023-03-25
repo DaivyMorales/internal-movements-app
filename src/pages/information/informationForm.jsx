@@ -5,33 +5,60 @@ import { contextInformation } from "@/context/ContextInformation";
 import { productContext } from "@/context/ContextProducts";
 
 export default function InformationForm({ data }) {
-  const { createInformation } = useContext(contextInformation);
-  const { products, setProducts } = useContext(productContext);
+  const { createInformation, getInformation, updateInformation } =
+    useContext(contextInformation);
+  const { products, setProducts, getProducts, getProduct } =
+    useContext(productContext);
+
+  const [productUpdate, setProductUpdate] = useState();
+  console.log("productUpdate", productUpdate);
 
   const { push, query } = useRouter();
 
   const [productsForm, setProductsForm] = useState({
-    op: 0,
+    op: Number,
     product: "",
     sap_lot: "",
     provider_lot: "",
-    packages_delivered: 0,
-    balances: 0,
+    packages_delivered: Number,
+    balances: Number,
   });
+
+  console.log("FORM", productsForm);
   const [productFoundForm, setProductFoundForm] = useState(null);
 
-  // const loadProduct = async (id) => {
-  //   const res = await getProduct(id);
-  //   console.log(res);
-  //   setProducts({
-  //     code: res.code,
-  //     description: res.description,
-  //     presentation: res.presentation,
-  //   });
-  // };
+  const loadInformation = async (idInformation) => {
+    const response = await getInformation(idInformation);
+    const resProduct = await getProduct(response.product);
+    setProductUpdate(resProduct);
+    setProductsForm({
+      op: response.op,
+      product: resProduct.code,
+      sap_lot: response.sap_lot,
+      provider_lot: response.provider_lot,
+      packages_delivered: response.packages_delivered,
+      balances: response.balances,
+    });
+    console.log("response", response);
+  };
+
+  const loadProducts = async () => {
+    const response = await getProducts();
+    setProducts(response);
+  };
 
   useEffect(() => {
-    setProducts(data);
+    if (query.id) {
+      loadInformation(query.id);
+      loadProducts();
+    } else {
+      setProducts(data);
+    }
+  }, []);
+
+  console.log("products", products);
+
+  useEffect(() => {
     if (productsForm.product.length >= 10) {
       const productFound = products.find(
         (product) => productsForm.product === product.code
@@ -60,16 +87,19 @@ export default function InformationForm({ data }) {
       <Formik
         enableReinitialize={true}
         initialValues={productsForm}
-        onSubmit={(values, { resetForm }) => {
-          //   if (query.id) {
-          //     const result = updateProduct(query.id, values);
-          //     console.log(result);
-          //   } else {
-          //     const result = createProduct(values);
-          //     console.log(result);
-          //   }
-          const result = createInformation(values);
-          console.log(result);
+        onSubmit={async (values, { resetForm }) => {
+          if (query.id) {
+            setProductsForm({
+              ...productsForm,
+              product: productUpdate._id,
+            });
+            const result = await updateInformation(query.id, values);
+            console.log(result);
+            console.log("finals values", values);
+          } else {
+            const result = await createInformation(values);
+            console.log(result);
+          }
           resetForm();
           push("/information");
         }}
@@ -78,7 +108,9 @@ export default function InformationForm({ data }) {
           <Form onSubmit={handleSubmit}>
             <div className="  container mx-auto flex flex-col gap-y-5 px-10">
               <h2 className="font-medium text-xl text-black">
-                Crear nueva Información
+                {query.id
+                  ? "Actualizar Información"
+                  : "Crear nueva Información"}
               </h2>
               <div className="flex flex-col gap-y-3">
                 <label htmlFor="op">Op</label>
@@ -149,6 +181,7 @@ export default function InformationForm({ data }) {
                     name="packages_delivered"
                     onChange={handleChange}
                     value={values.packages_delivered}
+                    placeholder="Ej: 10"
                   />
                 </div>
 
@@ -156,11 +189,12 @@ export default function InformationForm({ data }) {
                   <label htmlFor="balances"> Saldo</label>
                   <input
                     className="inputForm"
-                    type=""
+                    type="number"
                     name="balances"
                     onChange={handleChange}
                     value={values.balances}
                     step="0.01"
+                    placeholder="Ej: 1.5"
                   />
                 </div>
               </div>
@@ -168,7 +202,7 @@ export default function InformationForm({ data }) {
                 type="submit"
                 className="bg-black text-white py-2 rounded-xl text-sm font-semibold"
               >
-                Crear
+                {query.id ? "Actualizar" : "Crear"}
               </button>
             </div>
           </Form>
@@ -179,10 +213,20 @@ export default function InformationForm({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://darling-cassata-6b0d17.netlify.app//api/products");
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      "https://darling-cassata-6b0d17.netlify.app/api/products"
+    );
+    const data = await res.json();
 
-  return {
-    props: { data },
-  };
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    const res = await fetch("http://localhost:3000/api/products");
+    const data = await res.json();
+    return {
+      props: { data },
+    };
+  }
 }

@@ -32,17 +32,29 @@ export default function ProductContextComponent({ children }) {
   };
 
   const getProduct = async (productId) => {
-    const response = await axios.get(
-      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
-    );
-    return response.data;
+    try {
+      const response = await axios.get(
+        `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
+      );
+      return response.data;
+    } catch (error) {
+      const response = await axios.get(
+        `http://localhost:3000/api/products/${productId}`
+      );
+      return response.data;
+    }
   };
 
   const getProducts = async () => {
-    const response = await axios.get(
-      "https://darling-cassata-6b0d17.netlify.app/api/products"
-    );
-    return response.data;
+    try {
+      const response = await axios.get(
+        "https://darling-cassata-6b0d17.netlify.app/api/products"
+      );
+      return response.data;
+    } catch (error) {
+      const response = await axios.get("http://localhost:3000/api/products");
+      return response.data;
+    }
   };
 
   return (

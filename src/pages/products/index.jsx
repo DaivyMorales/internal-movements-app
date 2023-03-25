@@ -13,8 +13,6 @@ export default function Home({ data }) {
 
   return (
     <div>
-      
-
       {products.map((d) => (
         <div key={d._id}>
           <p>{d.code}</p>
@@ -43,12 +41,21 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(
-    "https://darling-cassata-6b0d17.netlify.app/api/products"
-  );
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      "https://darling-cassata-6b0d17.netlify.app/api/products"
+    );
+    const data = await res.json();
 
-  return {
-    props: { data },
-  };
+    return {
+      props: { data },
+    };
+  } catch (error) {
+    const res = await fetch("http://localhost:3000/api/products");
+    const data = await res.json();
+
+    return {
+      props: { data },
+    };
+  }
 }
