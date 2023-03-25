@@ -10,6 +10,7 @@ export default async function handler(req, res) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.setHeader("Access-Control-Allow-Methods", "DELETE", "PUT", "GET")
 
   const { method, body } = req;
 
@@ -41,24 +42,6 @@ export default async function handler(req, res) {
         });
         const informationSaved = await newInformation.save();
 
-        // Obtener el objeto plano de JavaScript con la función `lean()`
-        // const populatedInformation = await Information.findById(
-        //   informationSaved._id
-        // )
-        //   .populate({
-        //     path: "product",
-        //     select: "code description presentation -_id",
-        //   })
-        //   .lean()
-        //   .exec();
-
-        // // Renombrar la propiedad `product._id` a `product`
-        // populatedInformation.product = {
-        //   code: populatedInformation.product.code,
-        //   description: populatedInformation.product.description,
-        //   presentation: populatedInformation.product.presentation,
-        // };
-        // delete populatedInformation.product._id;
 
         return res.status(200).json(informationSaved);
       } catch (error) {
