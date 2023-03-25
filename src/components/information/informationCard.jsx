@@ -27,9 +27,9 @@ export default function InformationCard({ info }) {
       >
         {info.op}
       </th>
-      <td className="px-4 py-2">{product.code || info.product.code}</td>
+      <td className="px-4 py-2">{product.code}</td>
       <td className="px-4 py-2">
-        {product.description || info.product.description}
+        {product.description}
       </td>
       <td className="px-4 py-2">{info.sap_lot}</td>
       <td className="px-4 py-2">{info.provider_lot}</td>

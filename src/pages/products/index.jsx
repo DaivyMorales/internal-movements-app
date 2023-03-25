@@ -44,7 +44,7 @@ export default function Home({ data }) {
 
 export async function getServerSideProps(context) {
   const res = await fetch(
-    "https://internal-movements-app.vercel.app/api/products"
+    "https://darling-cassata-6b0d17.netlify.app/api/products"
   );
   const data = await res.json();
 

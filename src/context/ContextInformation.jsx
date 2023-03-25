@@ -8,7 +8,7 @@ export default function ContextInformationComponent({ children }) {
 
   const createInformation = async (information) => {
     const response = await axios.post(
-      "https://internal-movements-app.vercel.app/api/information",
+      "https://darling-cassata-6b0d17.netlify.app/api/information",
       information
     );
     setInformations([...informations, response.data]);
@@ -18,7 +18,7 @@ export default function ContextInformationComponent({ children }) {
 
   const deleteInformation = async (informationId) => {
     const response = await axios.delete(
-      `https://internal-movements-app.vercel.app/api/information/${informationId}`
+      `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
     );
     setInformations(informations.filter((info) => info._id !== informationId));
     return response.data;
@@ -26,7 +26,12 @@ export default function ContextInformationComponent({ children }) {
 
   return (
     <contextInformation.Provider
-      value={{ informations, setInformations, createInformation, deleteInformation }}
+      value={{
+        informations,
+        setInformations,
+        createInformation,
+        deleteInformation,
+      }}
     >
       {children}
     </contextInformation.Provider>
