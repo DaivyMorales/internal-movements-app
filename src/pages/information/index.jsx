@@ -16,7 +16,11 @@ export default function ViewInformation({ data }) {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div className="w-screen h-screen flex justify-center items-center flex-colgap-y-2 px-4 ">
+=======
+    <div className="w-screen h-screen flex justify-center items-center flex-colgap-y-2 px-4">
+>>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
       <div className=" bg-white flex pt-2 flex-col justify-start items-center  overflow-x-auto shadow-xs rounded-lg  ">
         <div className="w-full grid grid-cols-2 ">
           <div className="px-3 flex">
@@ -81,7 +85,11 @@ export default function ViewInformation({ data }) {
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< HEAD
   const res = await fetch("https://internal-movements-app.vercel.app/api/information");
+=======
+  const res = await fetch("http://localhost:3000/api/information");
+>>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
   const data = await res.json();
 
   return {

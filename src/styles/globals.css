@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+>>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
 
 :root {
   @apply bg-white text-black;
   font-family: "Inter", sans-serif;
 }
 
+<<<<<<< HEAD
 .inputForm{
   @apply text-xs text-black bg-white pl-4 py-2 rounded-lg shadow-sm  placeholder:text-gray-300;
   border-width: 1.8px;
+=======
+input {
+  border-width: 1.8px;
+  @apply text-xs text-black bg-white pl-4 py-2 rounded-lg shadow-sm  placeholder:text-gray-300;
+>>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
 }
 
 input:focus {
@@ -27,3 +39,10 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+<<<<<<< HEAD
+=======
+
+input[type="submit"]{
+  @apply bg-black;
+}
+>>>>>>> 8c472f252fb581660257381eda69455d4c9b1ed7
