@@ -1,10 +1,15 @@
 import ProductContextComponent from "@/context/ContextProducts";
+import ContextInformationComponent from "@/context/ContextInformation";
 import "@/styles/globals.css";
+import { Inter } from "@next/font/google";
+import "../../styles/main.css";
 
 export default function App({ Component, pageProps }) {
   return (
-    <ProductContextComponent>
-      <Component {...pageProps} />
-    </ProductContextComponent>
+    <ContextInformationComponent>
+      <ProductContextComponent>
+        <Component {...pageProps} />
+      </ProductContextComponent>
+    </ContextInformationComponent>
   );
 }
