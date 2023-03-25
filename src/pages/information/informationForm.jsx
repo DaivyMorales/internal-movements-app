@@ -179,9 +179,7 @@ export default function InformationForm({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch(
-    "https://darling-cassata-6b0d17.netlify.app/api/products"
-  );
+  const res = await fetch("http://localhost:3000/api/products");
   const data = await res.json();
 
   return {

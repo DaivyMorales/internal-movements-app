@@ -8,7 +8,7 @@ export default function ContextInformationComponent({ children }) {
 
   const createInformation = async (information) => {
     const response = await axios.post(
-      "https://darling-cassata-6b0d17.netlify.app/api/information",
+      "http://localhost:3000/api/information",
       information
     );
     setInformations([...informations, response.data]);
@@ -18,7 +18,7 @@ export default function ContextInformationComponent({ children }) {
 
   const deleteInformation = async (informationId) => {
     const response = await axios.delete(
-      `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
+      `http://localhost:3000/api/information/${informationId}`
     );
     setInformations(informations.filter((info) => info._id !== informationId));
     return response.data;
