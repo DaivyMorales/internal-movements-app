@@ -2,17 +2,25 @@ import { contextInformation } from "@/context/ContextInformation";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import InformationCard from "@/components/information/informationCard";
-import InformationForm from "./informationForm";
+import { productContext } from "@/context/ContextProducts";
 
 export default function ViewInformation({ data }) {
   const { informations, setInformations } = useContext(contextInformation);
+
+  const { products, setProducts, getProducts } = useContext(productContext);
 
   const [showForm, setShowForm] = useState(false);
 
   const router = useRouter();
 
+  const loadProducts = async () => {
+    const response = await getProducts();
+    setProducts(response.data);
+  };
+
   useEffect(() => {
     setInformations(data);
+    loadProducts();
   }, []);
 
   return (
@@ -81,7 +89,9 @@ export default function ViewInformation({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://darling-cassata-6b0d17.netlify.app/api/information");
+  const res = await fetch(
+    "https://darling-cassata-6b0d17.netlify.app/api/information"
+  );
   const data = await res.json();
 
   return {

@@ -5,6 +5,8 @@ import Product from "../../../models/product.model";
 dbConnect();
 
 export default async function handler(req, res) {
+  
+
   const { method, body } = req;
 
   switch (method) {

@@ -156,10 +156,11 @@ export default function InformationForm({ data }) {
                   <label htmlFor="balances"> Saldo</label>
                   <input
                     className="inputForm"
-                    type="number"
+                    type=""
                     name="balances"
                     onChange={handleChange}
                     value={values.balances}
+                    step="0.01"
                   />
                 </div>
               </div>
@@ -178,7 +179,9 @@ export default function InformationForm({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://darling-cassata-6b0d17.netlify.app/api/products");
+  const res = await fetch(
+    "https://darling-cassata-6b0d17.netlify.app/api/products"
+  );
   const data = await res.json();
 
   return {

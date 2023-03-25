@@ -38,6 +38,13 @@ export default function ProductContextComponent({ children }) {
     return response.data;
   };
 
+  const getProducts = async () => {
+    const response = await axios.get(
+      "https://darling-cassata-6b0d17.netlify.app/api/products"
+    );
+    return response.data;
+  };
+
   return (
     <productContext.Provider
       value={{
@@ -48,6 +55,7 @@ export default function ProductContextComponent({ children }) {
         updateProduct,
         getProduct,
         updateProduct,
+        getProducts,
       }}
     >
       {children}
