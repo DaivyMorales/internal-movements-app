@@ -8,7 +8,7 @@ export default function ProductContextComponent({ children }) {
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "https://darling-cassata-6b0d17.netlify.app/api/products",
+      "http://localhost:3000/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
@@ -25,7 +25,7 @@ export default function ProductContextComponent({ children }) {
 
   const updateProduct = async (productId, product) => {
     const response = await axios.put(
-      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`,
+      `http://localhost:3000/api/products/${productId}`,
       product
     );
     return response.data;
