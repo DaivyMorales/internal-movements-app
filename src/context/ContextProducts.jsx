@@ -5,10 +5,11 @@ export const productContext = createContext();
 
 export default function ProductContextComponent({ children }) {
   const [products, setProducts] = useState([]);
+  console.log(products);
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "http://localhost:3000/api/products",
+      "https://darling-cassata-6b0d17.netlify.app/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
@@ -19,13 +20,13 @@ export default function ProductContextComponent({ children }) {
     const response = await axios.delete(
       `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
     );
-    setProducts(products.filter((product) => product._id !== productId));
+    setProducts(products.filter((product) => product.code !== productId));
     return response.data;
   };
 
   const updateProduct = async (productId, product) => {
     const response = await axios.put(
-      `http://localhost:3000/api/products/${productId}`,
+      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`,
       product
     );
     return response.data;

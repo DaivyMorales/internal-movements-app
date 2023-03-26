@@ -1,7 +1,11 @@
 import { HiTrash, HiPencilAlt } from "react-icons/hi";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { productContext } from "@/context/ContextProducts";
 
 export default function ProductCard({ product }) {
+  const { deleteProduct } = useContext(productContext);
+
   const router = useRouter();
   return (
     <tr className="bg-white  border-b w-full h-full z-50">
@@ -25,7 +29,7 @@ export default function ProductCard({ product }) {
         <button
           className="p-1 "
           onClick={() => {
-            deleteInformation(product._id);
+            deleteProduct(product.code);
           }}
         >
           <HiTrash color="black" size={17} />

@@ -101,6 +101,7 @@ export default function InformationForm({ data }) {
                   ? "Actualizar Información"
                   : "Crear nueva Información"}
               </h2>
+
               <div className="flex flex-col gap-y-3">
                 <label htmlFor="op">Op</label>
                 <input
@@ -112,7 +113,6 @@ export default function InformationForm({ data }) {
                   placeholder="Ej: 512"
                 />
               </div>
-
               <div className="flex flex-col gap-y-3">
                 <div className="grid grid-cols-2">
                   <label htmlFor="product">Código </label>
@@ -202,7 +202,9 @@ export default function InformationForm({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const res = await fetch("https://darling-cassata-6b0d17.netlify.app/api/products");
+  const res = await fetch(
+    "https://darling-cassata-6b0d17.netlify.app/api/products"
+  );
   const data = await res.json();
   return {
     props: { data },
