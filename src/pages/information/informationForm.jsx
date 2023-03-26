@@ -74,7 +74,7 @@ export default function InformationForm({ data }) {
   };
 
   return (
-    <div className="flex flex-col w-screen h-screen justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <Formik
         enableReinitialize={true}
         initialValues={productsForm}

@@ -18,7 +18,7 @@ export default function ViewInformation({ data }) {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center flex-colgap-y-2 px-4 ">
+    <div className=" flex justify-center items-center flex-colgap-y-2 px-4 ">
       <div className=" bg-white flex pt-2 flex-col justify-start items-center  overflow-x-auto shadow-xs rounded-lg  ">
         <div className="w-full grid grid-cols-2 ">
           <div className="px-3 flex">
