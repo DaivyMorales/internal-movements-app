@@ -17,7 +17,7 @@ export default function InformationForm({ data }) {
 
   const [productsForm, setProductsForm] = useState({
     op: Number,
-    product: "",
+    product: null,
     sap_lot: "",
     provider_lot: "",
     packages_delivered: Number,
@@ -44,27 +44,32 @@ export default function InformationForm({ data }) {
     setProducts(response);
   };
 
+  console.log("PRODUCTS", products);
+
   useEffect(() => {
     loadProducts();
+
     if (query.id) {
       loadInformation(query.id);
     }
   }, []);
 
   useEffect(() => {
-    if (productsForm.product.length >= 10) {
-      const productFound = products.find(
-        (product) => productsForm.product === product.code
-      );
+    if (productsForm.product !== null) {
+      if (productsForm.product.length >= 10) {
+        const productFound = products.find(
+          (product) => productsForm.product === product.code
+        );
 
-      if (productFound === undefined) {
-        console.log("NOT FOUND");
-        setProductFoundForm(0);
+        if (productFound === undefined) {
+          console.log("NOT FOUND");
+          setProductFoundForm(0);
+        } else {
+          setProductFoundForm(productFound.description);
+        }
       } else {
-        setProductFoundForm(productFound.description);
+        setProductFoundForm(null);
       }
-    } else {
-      setProductFoundForm(null);
     }
   }, [productsForm.product, products]);
 

@@ -9,7 +9,7 @@ export default function ProductContextComponent({ children }) {
 
   const createProduct = async (newProduct) => {
     const response = await axios.post(
-      "https://darling-cassata-6b0d17.netlify.app/api/products",
+      "http://localhost:3000/api/products",
       newProduct
     );
     setProducts([...products, response.data]);
@@ -18,7 +18,7 @@ export default function ProductContextComponent({ children }) {
 
   const deleteProduct = async (productId) => {
     const response = await axios.delete(
-      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
+      `http://localhost:3000/api/products/${productId}`
     );
     setProducts(products.filter((product) => product.code !== productId));
     return response.data;
@@ -26,8 +26,17 @@ export default function ProductContextComponent({ children }) {
 
   const updateProduct = async (productId, product) => {
     const response = await axios.put(
-      `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`,
+      `http://localhost:3000/api/products/${productId}`,
       product
+    );
+    setProducts(
+      products.map((product) => {
+        if (product._id === productId) {
+          return response.data;
+        } else {
+          return product;
+        }
+      })
     );
     return response.data;
   };
@@ -35,19 +44,18 @@ export default function ProductContextComponent({ children }) {
   const getProduct = async (productId) => {
     try {
       const response = await axios.get(
-        `https://darling-cassata-6b0d17.netlify.app/api/products/${productId}`
+        `http://localhost:3000/api/products/${productId}`
       );
       return response.data;
     } catch (error) {
-      console.log(error);
+      console.log(error.request.status);
+      return error.request.status;
     }
   };
 
   const getProducts = async () => {
     try {
-      const response = await axios.get(
-        "https://darling-cassata-6b0d17.netlify.app/api/products"
-      );
+      const response = await axios.get("http://localhost:3000/api/products");
       return response.data;
     } catch (error) {
       console.log(error);

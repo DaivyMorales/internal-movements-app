@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import InformationCard from "@/components/information/informationCard";
 import { productContext } from "@/context/ContextProducts";
+import { HiExclamation } from "react-icons/hi";
 
 export default function ViewInformation({ data }) {
   const { informations, setInformations } = useContext(contextInformation);
@@ -22,7 +23,7 @@ export default function ViewInformation({ data }) {
   };
 
   return (
-    <div className=" flex justify-center items-center flex-colgap-y-2 px-4 ">
+    <div className=" flex justify-center items-center flex-col gap-y-2 px-4 ">
       <div className=" bg-white flex pt-2 flex-col justify-start items-center  overflow-x-auto shadow-xs rounded-lg  ">
         <div className="w-full grid grid-cols-2 ">
           <div className="px-3 flex flex-col justify-start items-start gap-y-2">
@@ -100,6 +101,14 @@ export default function ViewInformation({ data }) {
               ))}
           </tbody>
         </table>
+      </div>
+      <div className="px-3 py-2 bg-yellow-200 rounded-lg">
+        <HiExclamation />
+        <p className="text-xs font-semibold ">
+          <span className="font-bold">Nota:</span> Si ha hecho algun cambio y no
+          se ve actualizado,
+          <br /> se recomienda refrescar la pagina.
+        </p>
       </div>
     </div>
   );

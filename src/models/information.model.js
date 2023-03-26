@@ -9,14 +9,19 @@ const informationSchema = new Schema(
     product: {
       type: String,
       ref: "Product",
-      required: [true, "The code is required!"],
       validate: {
         validator: function (code) {
-          return Product.findOne({ code })
-            .then((product) => !!product)
-            .catch(() => false);
+          if (code === undefined || code === null) {
+            // El campo es opcional y no se debe validar
+            return true;
+          } else {
+            // El campo es obligatorio y se debe validar
+            return Product.findOne({ code })
+              .then((product) => !!product)
+              .catch(() => false);
+          }
         },
-        message: "The product does not exist",
+        message: "El producto no existe",
       },
     },
     sap_lot: {

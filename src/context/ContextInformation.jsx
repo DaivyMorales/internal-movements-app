@@ -9,7 +9,7 @@ export default function ContextInformationComponent({ children }) {
   const createInformation = async (information) => {
     try {
       const response = await axios.post(
-        "https://darling-cassata-6b0d17.netlify.app/api/information",
+        "http://localhost:3000/api/information",
         information
       );
       setInformations([...informations, response.data]);
@@ -23,7 +23,7 @@ export default function ContextInformationComponent({ children }) {
   const deleteInformation = async (informationId) => {
     try {
       const response = await axios.delete(
-        `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
+        `http://localhost:3000/api/information/${informationId}`
       );
       setInformations(
         informations.filter((info) => info._id !== informationId)
@@ -37,7 +37,7 @@ export default function ContextInformationComponent({ children }) {
   const getInformation = async (informationId) => {
     try {
       const response = await axios.get(
-        `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`
+        `http://localhost:3000/api/information/${informationId}`
       );
 
       return response.data;
@@ -49,8 +49,17 @@ export default function ContextInformationComponent({ children }) {
   const updateInformation = async (informationId, information) => {
     try {
       const response = await axios.put(
-        `https://darling-cassata-6b0d17.netlify.app/api/information/${informationId}`,
+        `http://localhost:3000/api/information/${informationId}`,
         information
+      );
+      setInformations(
+        informations.map((info) => {
+          if (info._id === informationId) {
+            return response.data;
+          } else {
+            return info;
+          }
+        })
       );
       return response.data;
     } catch (error) {

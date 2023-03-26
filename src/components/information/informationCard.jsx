@@ -12,14 +12,18 @@ export default function InformationCard({ info }) {
 
   const [product, setProduct] = useState([]);
   // console.log("product", product);
-  console.log("code", info.product);
+  console.log("product", product);
+
+  const [productStatusRequest, setProductStatusRequest] = useState()
 
   const loadProduct = async (code) => {
     const response = await getProduct(code);
     setProduct(response);
   };
   useEffect(() => {
-    loadProduct(info.product);
+    if (info.product !== null) {
+      loadProduct(info.product);
+    }
   }, []);
 
   return (
@@ -30,7 +34,9 @@ export default function InformationCard({ info }) {
       >
         {info.op}
       </th>
-      <td className="px-4 py-2">{product.code}</td>
+      <td className="px-4 py-2">
+        {!product.code || product === 404 ? "Sin producto" : product.code}
+      </td>
       <td className="px-4 py-2">{product.description}</td>
       <td className="px-4 py-2">{info.sap_lot}</td>
       <td className="px-4 py-2">{info.provider_lot}</td>
