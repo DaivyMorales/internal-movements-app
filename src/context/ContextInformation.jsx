@@ -9,7 +9,7 @@ export default function ContextInformationComponent({ children }) {
   const createInformation = async (information) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/information",
+        "https://darling-cassata-6b0d17.netlify.app/api/information",
         information
       );
       setInformations([...informations, response.data]);
