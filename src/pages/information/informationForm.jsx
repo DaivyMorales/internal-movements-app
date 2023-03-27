@@ -56,7 +56,7 @@ export default function InformationForm({ data }) {
 
   useEffect(() => {
     if (productsForm.product !== null) {
-      if (productsForm.product.length >= 10) {
+      if (productsForm.product.length >= 8) {
         const productFound = products.find(
           (product) => productsForm.product === product.code
         );

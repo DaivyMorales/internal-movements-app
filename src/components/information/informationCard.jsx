@@ -3,9 +3,15 @@ import { productContext } from "@/context/ContextProducts";
 import { useContext, useEffect, useState } from "react";
 import { HiPencilAlt, HiTrash } from "react-icons/hi";
 import { useRouter } from "next/router";
+import { format } from "date-fns";
 
 export default function InformationCard({ info }) {
   const router = useRouter();
+
+  const fechaISO8601 = info.createdAt;
+  const fecha = new Date(fechaISO8601);
+  const fechaFormateada = format(fecha, "dd/MM/yyyy");
+  console.log(fechaFormateada);
 
   const { getProduct } = useContext(productContext);
   const { deleteInformation } = useContext(contextInformation);
@@ -14,7 +20,7 @@ export default function InformationCard({ info }) {
   // console.log("product", product);
   console.log("product", product);
 
-  const [productStatusRequest, setProductStatusRequest] = useState()
+  const [productStatusRequest, setProductStatusRequest] = useState();
 
   const loadProduct = async (code) => {
     const response = await getProduct(code);
@@ -28,6 +34,7 @@ export default function InformationCard({ info }) {
 
   return (
     <tr className="bg-white  border-b w-full h-full">
+      <td className="px-4 py-2">{fechaFormateada}</td>
       <th
         scope="row"
         className="px-4 py-2 font-semibold text-black  whitespace-nowrap"

@@ -62,6 +62,9 @@ export default function ViewInformation({ data }) {
           <thead className="text-xs text-black ">
             <tr className="">
               <th scope="col" className="px-3 py-2">
+                Fecha
+              </th>
+              <th scope="col" className="px-3 py-2">
                 Op
               </th>
               <th scope="col" className="px-3 py-2">
