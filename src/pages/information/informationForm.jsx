@@ -102,6 +102,7 @@ export default function InformationForm({ data }) {
   const handleSapLotChange = (event) => {
     const sap_lot = event.target.value;
     formik.setFieldValue("sap_lot", sap_lot);
+    setProductsForm({ ...productsForm, sap_lot: sap_lot });
   };
 
   console.log("VALUES -->", formik.values);
