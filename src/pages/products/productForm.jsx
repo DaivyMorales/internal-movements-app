@@ -1,5 +1,5 @@
 import { productContext } from "@/context/ContextProducts";
-import { Formik, Form } from "formik";
+import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -31,75 +31,76 @@ export default function ProductForm({ showForm, setShowForm }) {
     }
   }, []);
 
-  console.log(query.id);
+  const formik = useFormik({
+    initialValues: { products },
+    enableReinitialize: true,
+    onSubmit: async (values, { resetForm }) => {
+      if (query.id) {
+        const result = await updateProduct(query.id, values);
+        console.log(result);
+      } else {
+        const result = await createProduct(values);
+        console.log(result);
+      }
+      resetForm();
+      push("/products");
+      setShowForm(!showForm);
+    },
+  });
+
+  const handleCodeChange = (event) => {
+    const code = event.target.value;
+    formik.setFieldValue("code", code);
+  };
 
   return (
-    <Formik
-      enableReinitialize={true}
-      initialValues={products}
-      onSubmit={(values, { resetForm }) => {
-        if (query.id) {
-          const result = updateProduct(query.id, values);
-          console.log(result);
-        } else {
-          const result = createProduct(values);
-          console.log(result);
-        }
-        resetForm();
-        push("/products");
-        setShowForm(!showForm);
-      }}
-    >
-      {({ values, handleChange, handleSubmit }) => (
-        <Form onSubmit={handleSubmit}>
-          <div className=" px-24  py-6 rounded-xl flex flex-col gap-y-2 justify-center items-center ">
-            <h1></h1>
-            <h2 className="font-bold text-2xl text-black">
-              {query.id ? "Actualizar Producto" : "Crear Producto"}
-            </h2>
-            <div className="col-span-2 flex flex-col gap-y-1">
-              <label htmlFor="code">Código</label>
-              <input
-                className="inputForm"
-                type="text"
-                name="code"
-                onChange={handleChange}
-                value={values.code}
-                placeholder="Ej: 1872720583"
-              />
-            </div>
-            <div className="col-span-2 flex flex-col gap-y-1">
-              <label htmlFor="description">Descripción</label>
-              <input
-                className="inputForm"
-                type="text"
-                name="description"
-                onChange={handleChange}
-                value={values.description}
-                placeholder="Ej: Carrier"
-              />
-            </div>
+    <form onSubmit={formik.handleSubmit}>
+      <div className=" px-24  py-6 rounded-xl flex flex-col gap-y-2 justify-center items-center ">
+        <h1></h1>
+        <h2 className="font-bold text-2xl text-black">
+          {query.id ? "Actualizar Producto" : "Crear Producto"}
+        </h2>
+        <div className="col-span-2 flex flex-col gap-y-1">
+          <label htmlFor="code">Código</label>
+          <input
+            className="inputForm"
+            type="text"
+            name="code"
+            onChange={handleCodeChange}
+            value={formik.values.code}
+            placeholder="Ej: 1872720583"
+          />
+        </div>
+        <div className="col-span-2 flex flex-col gap-y-1">
+          <label htmlFor="description">Descripción</label>
+          <input
+            className="inputForm"
+            type="text"
+            name="description"
+            onChange={formik.handleChange}
+            value={formik.values.description}
+            placeholder="Ej: Carrier"
+          />
+        </div>
 
-            <div className="col-span-2 flex flex-col gap-y-1">
-              <label htmlFor="presentation">Presentación</label>
-              <input
-                className="inputForm"
-                type="number"
-                name="presentation"
-                onChange={handleChange}
-                value={values.presentation}
-                placeholder="Ej: 12"
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-black text-white py-2 rounded-xl text-sm  border-2 font-semibold px-14 hover:bg-white hover:text-black hover: border-black"
-            >
-              {query.id ? "Actualizar" : "Crear"}
-            </button>
-          </div>
-        </Form>
-      )}
-    </Formik>
+        <div className="col-span-2 flex flex-col gap-y-1">
+          <label htmlFor="presentation">Presentación</label>
+          <input
+            className="inputForm"
+            type="number"
+            name="presentation"
+            onChange={formik.handleChange}
+            value={formik.values.presentation}
+            placeholder="Ej: 12"
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-black text-white py-2 rounded-xl text-sm  border-2 font-semibold px-14 hover:bg-white hover:text-black hover: border-black"
+        >
+          {query.id ? "Actualizar" : "Crear"}
+        </button>
+      </div>
+    </form>
   );
 }

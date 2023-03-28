@@ -105,6 +105,12 @@ export default function InformationForm({ data }) {
     setProductsForm({ ...productsForm, sap_lot: sap_lot });
   };
 
+  const handleProviderLotChange = (event) => {
+    const provider_lot = event.target.value;
+    formik.setFieldValue("provider_lot", provider_lot);
+    setProductsForm({ ...productsForm, provider_lot: provider_lot });
+  };
+
   console.log("VALUES -->", formik.values);
 
   return (
@@ -168,7 +174,7 @@ export default function InformationForm({ data }) {
               className="inputForm"
               type="text"
               name="provider_lot"
-              onChange={formik.handleChange && handleChange}
+              onChange={handleProviderLotChange}
               value={productsForm.provider_lot}
               placeholder="Ej: 276326376Y"
             />
