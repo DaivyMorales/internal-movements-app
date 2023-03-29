@@ -17,7 +17,6 @@ export default function ProductForm({ showForm, setShowForm }) {
 
   const loadProduct = async (id) => {
     const res = await getProduct(id);
-    console.log(res);
     setProducts({
       code: res.code,
       description: res.description,
@@ -33,25 +32,33 @@ export default function ProductForm({ showForm, setShowForm }) {
 
   const formik = useFormik({
     initialValues: { products },
-    enableReinitialize: true,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (products, { resetForm }) => {
       if (query.id) {
-        const result = await updateProduct(query.id, values);
+        const result = await updateProduct(query.id, products.products);
         console.log(result);
       } else {
-        const result = await createProduct(values);
+        const result = await createProduct(products.products);
         console.log(result);
       }
       resetForm();
       push("/products");
       setShowForm(!showForm);
     },
+    enableReinitialize: true,
   });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setProducts((prevProducts) => ({ ...prevProducts, [name]: value }));
+  };
 
   const handleCodeChange = (event) => {
     const code = event.target.value;
     formik.setFieldValue("code", code);
+    setProducts({ ...products, code: code });
   };
+
+  console.log(formik.values);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -67,7 +74,7 @@ export default function ProductForm({ showForm, setShowForm }) {
             type="text"
             name="code"
             onChange={handleCodeChange}
-            value={products.code}
+            value={formik.values.products.code}
             placeholder="Ej: 1872720583"
           />
         </div>
@@ -77,8 +84,8 @@ export default function ProductForm({ showForm, setShowForm }) {
             className="inputForm"
             type="text"
             name="description"
-            onChange={formik.handleChange}
-            value={products.description}
+            onChange={handleChange}
+            value={formik.values.products.description}
             placeholder="Ej: Carrier"
           />
         </div>
@@ -89,8 +96,8 @@ export default function ProductForm({ showForm, setShowForm }) {
             className="inputForm"
             type="number"
             name="presentation"
-            onChange={formik.handleChange}
-            value={products.presentation}
+            onChange={handleChange}
+            value={formik.values.products.presentation}
             placeholder="Ej: 12"
           />
         </div>
