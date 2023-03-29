@@ -67,7 +67,7 @@ export default function ProductForm({ showForm, setShowForm }) {
             type="text"
             name="code"
             onChange={handleCodeChange}
-            value={formik.values.code}
+            value={products.code}
             placeholder="Ej: 1872720583"
           />
         </div>
@@ -78,7 +78,7 @@ export default function ProductForm({ showForm, setShowForm }) {
             type="text"
             name="description"
             onChange={formik.handleChange}
-            value={formik.values.description}
+            value={products.description}
             placeholder="Ej: Carrier"
           />
         </div>
@@ -90,7 +90,7 @@ export default function ProductForm({ showForm, setShowForm }) {
             type="number"
             name="presentation"
             onChange={formik.handleChange}
-            value={formik.values.presentation}
+            value={products.presentation}
             placeholder="Ej: 12"
           />
         </div>
