@@ -9,7 +9,7 @@ export default function ContextInventoryComponent({ children }) {
   const createInventory = async (Inventory) => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/inventory",
+        "https://darling-cassata-6b0d17.netlify.app/api/inventory",
         Inventory
       );
       setInventories([...inventories, response.data]);
@@ -23,7 +23,7 @@ export default function ContextInventoryComponent({ children }) {
   const deleteInventory = async (inventoryId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3000/api/inventory/${inventoryId}`
+        `https://darling-cassata-6b0d17.netlify.app/api/inventory/${inventoryId}`
       );
       setInventories(
         inventories.filter((info) => info._id !== inventoryId)
@@ -37,7 +37,7 @@ export default function ContextInventoryComponent({ children }) {
   const getInventory = async (inventoryId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/inventory/${inventoryId}`
+        `https://darling-cassata-6b0d17.netlify.app/api/inventory/${inventoryId}`
       );
 
       return response.data;
@@ -49,7 +49,7 @@ export default function ContextInventoryComponent({ children }) {
   const updateInventory = async (inventoryId, inventory) => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/api/inventory/${inventoryId}`,
+        `https://darling-cassata-6b0d17.netlify.app/api/inventory/${inventoryId}`,
         inventory
       );
       setInventories(

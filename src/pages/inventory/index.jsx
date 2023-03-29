@@ -45,7 +45,7 @@ export default function Home({ data }) {
             <div
               className="flex justify-center items-center gap-x-2 text-white bg-black px-4 cursor-pointer text-xs font-semibold border-2 py-2 rounded-xl hover:bg-white hover:text-black hover:border-black"
               onClick={() => {
-                router.push("/information/informationForm");
+                router.push("/inventory/InventoryForm");
                 // setShowForm(!showForm);
               }}
             >

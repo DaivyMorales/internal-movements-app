@@ -32,6 +32,9 @@ export default function InventoryCard({ inventory }) {
     }
   }, []);
 
+  const resultFormule =
+    inventory.bulk_quantity * product.presentation + inventory.balance_quantity;
+
   return (
     <tr className="bg-white  border-b w-full h-full">
       {/* <td className="px-4 py-2">{fechaFormateada}</td> */}
@@ -50,8 +53,7 @@ export default function InventoryCard({ inventory }) {
       <td className="px-4 py-2">{inventory.bulk_quantity}</td>
       <td className="px-4 py-2">{inventory.balance_quantity}</td>
       <td className="px-4 py-2 font-semibold text-black  whitespace-nowrap">
-        {inventory.bulk_quantity * product.presentation +
-          inventory.balance_quantity}
+        {!resultFormule ? "" : resultFormule}
       </td>
       <td className="px-4 py-2">
         {/* <a
@@ -73,7 +75,7 @@ export default function InventoryCard({ inventory }) {
         <button
           className="p-1 "
           onClick={() => {
-            router.push(`/information/${info._id}/edit`);
+            router.push(`/inventory/${inventory._id}/edit`);
           }}
         >
           <HiPencilAlt color="black" />
