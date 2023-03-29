@@ -17,8 +17,8 @@ export default function Home({ data }) {
   }, [data]);
 
   return (
-    <div className=" flex flex-col justify-center items-center px-4 gap-y-5 mb-20  lg:mt-0 lg:mb-0">
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <div className=" flex flex-col justify-center items-center px-4 gap-y-5 mb-20">
+      <div className="grid grid-cols-1 gap-6">
         {!showForm ? (
           <div className="px-24 border-2 border-dashed border-slate-200 py-6 rounded-xl flex flex-col gap-y-1 justify-center items-center text-center">
             <div className="p-2 bg-slate-200 rounded-full">

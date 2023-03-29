@@ -7,7 +7,7 @@
   font-family: "Inter", sans-serif;
 }
 
-.inputForm{
+.inputForm {
   @apply text-xs text-black bg-white pl-4 py-2 rounded-lg shadow-sm  placeholder:text-gray-300;
   border-width: 1.8px;
 }
@@ -28,3 +28,12 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.excel-button {
+  border-width: 2px;
+  @apply flex justify-center border-black items-center gap-x-2 text-black bg-white px-4 cursor-pointer text-xs font-semibold py-2 rounded-xl hover:bg-green-600 hover:text-white hover:border-green-700;
+}
+
+.create-button {
+  border-width: 2px;
+  @apply flex justify-center items-center gap-x-2 text-white bg-black border-black px-4 cursor-pointer text-xs font-semibold  py-2 rounded-xl hover:bg-white hover:text-black hover:border-black;
+} 

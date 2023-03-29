@@ -50,9 +50,9 @@ export default function Home({ data }) {
               />
             </div> */}
           </div>
-          <div className="flex justify-end items-end px-3">
+          <div className="flex justify-end items-end gap-x-2 px-3">
             <div
-              className="flex justify-center items-center gap-x-2 text-white bg-black px-4 cursor-pointer text-xs font-semibold border-2 py-2 rounded-xl hover:bg-white hover:text-black hover:border-black"
+              className="create-button"
               onClick={() => {
                 router.push("/inventory/InventoryForm");
                 // setShowForm(!showForm);

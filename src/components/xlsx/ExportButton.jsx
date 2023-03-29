@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import * as XLSX from "xlsx";
+import { SiMicrosoftexcel } from "react-icons/si";
 
 export default function ExportButton({ tableId }) {
   const handleDownload = () => {
@@ -21,9 +22,10 @@ export default function ExportButton({ tableId }) {
   return (
     <div
       id="export-button"
-      className="flex justify-center items-center gap-x-2 text-white bg-black px-4 cursor-pointer text-xs font-semibold border-2 py-2 rounded-xl hover:bg-white hover:text-black hover:border-black"
+      className="excel-button"
     >
-      Exportar Excel
+      Exportar a Excel
+      <SiMicrosoftexcel color="whites"/>
     </div>
   );
 }

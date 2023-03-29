@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import InformationCard from "@/components/information/informationCard";
 import { productContext } from "@/context/ContextProducts";
 import { HiExclamation } from "react-icons/hi";
+import ExportButton from "@/components/xlsx/ExportButton";
 
 export default function ViewInformation({ data }) {
   const { informations, setInformations } = useContext(contextInformation);
@@ -23,7 +24,7 @@ export default function ViewInformation({ data }) {
   };
 
   return (
-    <div className=" flex justify-center items-center flex-col gap-y-2 px-4 ">
+    <div className=" flex justify-center items-center flex-col gap-y-2 px-4  mb-20">
       <div className=" bg-white flex pt-2 flex-col justify-start items-center  overflow-x-auto shadow-xs rounded-lg  ">
         <div className="w-full grid grid-cols-2 ">
           <div className="px-3 flex flex-col justify-start items-start gap-y-2">
@@ -45,9 +46,9 @@ export default function ViewInformation({ data }) {
               />
             </div>
           </div>
-          <div className="flex justify-end items-end px-3">
+          <div className="flex justify-end items-end gap-x-2 px-3">
             <div
-              className="flex justify-center items-center gap-x-2 text-white bg-black px-4 cursor-pointer text-xs font-semibold border-2 py-2 rounded-xl hover:bg-white hover:text-black hover:border-black"
+              className="create-button"
               onClick={() => {
                 router.push("/information/informationForm");
                 // setShowForm(!showForm);
@@ -56,9 +57,13 @@ export default function ViewInformation({ data }) {
               Crear
               {/* <HiArrowSmRight /> */}
             </div>
+            <ExportButton tableId="table-information" />
           </div>
         </div>
-        <table className="text-sm text-left w-full text-gray-500 ">
+        <table
+          id="table-information"
+          className="text-sm text-left w-full text-gray-500 "
+        >
           <thead className="text-xs text-black ">
             <tr className="">
               <th scope="col" className="px-3 py-2">
@@ -104,14 +109,6 @@ export default function ViewInformation({ data }) {
               ))}
           </tbody>
         </table>
-      </div>
-      <div className="px-3 py-2 bg-yellow-200 rounded-lg">
-        <HiExclamation />
-        <p className="text-xs font-semibold ">
-          <span className="font-bold">Nota:</span> Si ha hecho algun cambio y no
-          se ve actualizado,
-          <br /> se recomienda refrescar la pagina.
-        </p>
       </div>
     </div>
   );
