@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import InventoryCard from "@/components/inventory/InventoryCard";
 import { contextInventory } from "@/context/ContextInventory";
+import XLSX from "xlsx";
+import ExportButton from "@/components/xlsx/ExportButton";
 
 export default function Home({ data }) {
   const { inventories, setInventories } = useContext(contextInventory);
@@ -16,6 +18,13 @@ export default function Home({ data }) {
 
   const handleOp = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleDownload = () => {
+    const wb = XLSX.utils.table_to_book(document.querySelector("#my-table"), {
+      sheet: "Sheet 1",
+    });
+    XLSX.writeFile(wb, "data.xlsx");
   };
 
   return (
@@ -52,9 +61,14 @@ export default function Home({ data }) {
               Crear
               {/* <HiArrowSmRight /> */}
             </div>
+
+            <ExportButton tableId="my-table" />
           </div>
         </div>
-        <table className="text-sm text-left w-full text-gray-500 ">
+        <table
+          id="my-table"
+          className="text-sm text-left w-full text-gray-500 "
+        >
           <thead className="text-xs text-black ">
             <tr className="">
               {/* <th scope="col" className="px-3 py-2">

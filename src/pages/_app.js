@@ -4,6 +4,7 @@ import ContextInventoryComponent from "@/context/ContextInventory";
 import "@/styles/globals.css";
 import "../../styles/main.css";
 import Layout from "../components/Layout";
+import XLSX from "xlsx";
 
 export default function App({ Component, pageProps }) {
   return (
