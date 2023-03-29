@@ -23,13 +23,13 @@ export default function Home({ data }) {
       <div className=" bg-white flex pt-2 flex-col justify-start items-center  overflow-x-auto shadow-xs rounded-lg  ">
         <div className="w-full grid grid-cols-2 ">
           <div className="px-3 flex flex-col justify-start items-start gap-y-2">
-            <div className="flex">
-              <h2 className="font-black text-2xl text-black">
-                Inventario
-              </h2>
-              <p className="text-green-500 text-xs font-black">
-                {inventories.length}
-              </p>
+            <div className="flex justify-center items-center gap-x-1 ">
+              <h2 className="font-black text-2xl text-black">Inventario</h2>
+              <div className="p-1 bg-green-800 rounded-full">
+                <p className="text-green-200 text-xs font-black ">
+                  {inventories.length}
+                </p>
+              </div>
             </div>
             {/* <div className="flex flex-col gap-y-1">
               <label htmlFor="">Filtrar por Op</label>
@@ -77,6 +77,9 @@ export default function Home({ data }) {
               </th>
               <th scope="col" className="px-3 py-2">
                 Cantidad Saldo
+              </th>
+              <th scope="col" className="px-3 py-2">
+                Cantidad TOTAL
               </th>
               <th scope="col" className="px-3 py-2">
                 Acciones

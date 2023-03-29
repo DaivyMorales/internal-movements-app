@@ -27,6 +27,15 @@ export const Navbar = () => {
           <p
             className="text-gray-500 hover:text-white cursor-pointer text-xs"
             onClick={() => {
+              push("/inventory");
+              // replace(asPath);
+            }}
+          >
+            Inventario
+          </p>
+          <p
+            className="text-gray-500 hover:text-white cursor-pointer text-xs"
+            onClick={() => {
               push("/information");
               // replace(asPath);
             }}

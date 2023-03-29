@@ -49,6 +49,10 @@ export default function InventoryCard({ inventory }) {
       <td className="px-4 py-2">{inventory.sap_lot}</td>
       <td className="px-4 py-2">{inventory.bulk_quantity}</td>
       <td className="px-4 py-2">{inventory.balance_quantity}</td>
+      <td className="px-4 py-2 font-semibold text-black  whitespace-nowrap">
+        {inventory.bulk_quantity * product.presentation +
+          inventory.balance_quantity}
+      </td>
       <td className="px-4 py-2">
         {/* <a
           href="#"
